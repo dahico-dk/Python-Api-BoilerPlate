@@ -1,5 +1,5 @@
 settings = {
-    "Database_url": "mssql+pymssql://@localhost:1433/?charset=utf8",
+    "Database_url": "mssql+pymssql://test:1234@localhost:1433/testdb?charset=utf8?driver=SQL+Server",
     "SQLDB": "SQLDB",
     "MongoDB": "MongoDB",
     "Socket": "Socket",

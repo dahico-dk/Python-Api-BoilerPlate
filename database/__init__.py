@@ -45,10 +45,10 @@ def db_drop_all():
 
 
 def db_create_all():
-    engine = create_engine(db_url())
-    print(engine.url)
-    if not database_exists(engine.url):
-        create_database(engine.url)
+    # engine = create_engine(db_url())
+    # print(engine.url)
+    # if not database_exists(engine.url):
+    #     create_database(engine.url)
     db.create_all()
     db.session.commit()
 
