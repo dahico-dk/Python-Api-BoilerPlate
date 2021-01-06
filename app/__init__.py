@@ -4,7 +4,7 @@ from auth.auth import requires_auth, create_enc_token, decrypt
 from flask_session import Session
 from app.errorhandler import set_handler
 import uuid
-from database import db_create_all, db_drop_all, Test, setup_db
+from sql_db import db_create_all, db_drop_all, Test, setup_db
 
 
 def create_app(test_config=None):
