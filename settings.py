@@ -1,13 +1,25 @@
+# db connection string formats
+# mssql (using pymssql)
+# mssql+pymssql://<username>:<password>@<freetds_name>/?charset=utf8
+
+# postgresql
+# postgresql://[username]:[pass]@[db url]/[db_name]
+
+# mysql
+# mysql+pymysql://<username>:<password>@<host>/<dbname>[?<options>]
+
+
 settings = {
-    "Database_url": "mssql+pymssql://test:1234@localhost:1433/testdb?charset=utf8?driver=SQL+Server",
+    "SQL_Database_url": "mssql+pyodbc://hakkisagdic:kodluyoruz.!2020@kodluyoruz.database.windows.net:1433/daghaninki2?driver=SQL+Server",
     "SQLDB": "SQLDB",
-    "MongoDB": "MongoDB",
+    "MongoDB": "mongodb+srv://dhc:6cILUsDI3BBIPeHn@cluster0.ubhyi.mongodb.net/?retryWrites=true&w=majority",
+    "MongoDB_dbName": "Test_DB",
     "Socket": "Socket",
 }
 
 
 def db_url():
-    return settings["Database_url"]
+    return settings["SQL_Database_url"]
 
 
 def sqldb():
@@ -15,7 +27,7 @@ def sqldb():
 
 
 def mongodb():
-    return settings["MongoDB"]
+    return settings["MongoDB"], settings["MongoDB_dbName"]
 
 
 def socket():

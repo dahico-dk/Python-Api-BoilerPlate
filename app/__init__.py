@@ -1,10 +1,13 @@
 from flask import Flask, jsonify, abort
 from flask_cors import CORS
-from auth.auth import requires_auth, create_enc_token, decrypt
+from auth.auth import requires_auth, create_ enc_token, decrypt
 from flask_session import Session
 from app.errorhandler import set_handler
 import uuid
-from sql_db import db_create_all, db_drop_all, Test, setup_db
+from database.sql import db_create_all, db_drop_all, Test, setup_sql_db
+from database.sql import DBType
+from database.sql import Test
+from database.mongodb import MongoLayer
 
 
 def create_app(test_config=None):
@@ -12,7 +15,8 @@ def create_app(test_config=None):
     CORS(app, resources={r"/api/*": {"origins": "*"}})
     app.secret_key = "F*q}/{QAKpF:M,Z3W7zBN2n0MV@}m;VLz)*!o'),;-MiX" + str(uuid.uuid4())
     app = set_handler(app)
-    setup_db(app)
+    setup_sql_db(app, dbtype=DBType.MSSQL, username="hakkisagdic", password="kodluyoruz.!2020",
+                 host="kodluyoruz.database.windows.net: 1433", database_name="daghaninki")
     db_create_all()
 
     # CORS Headers

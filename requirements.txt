@@ -7,6 +7,7 @@ cffi==1.14.4
 click==7.1.2
 colorama==0.4.3
 cryptography==3.3.1
+dnspython==2.0.0
 docutils==0.15.2
 ecdsa==0.14.1
 Flask==1.1.2
@@ -23,11 +24,14 @@ jwcrypto==0.8
 MarkupSafe==1.1.1
 packaging==20.8
 pluggy==0.13.1
+psycopg2==2.8.6
 py==1.10.0
 pyasn1==0.4.8
 pycparser==2.20
 PyJWT==2.0.0
-pymssql==2.1.5
+pymongo==3.11.2
+PyMySQL==0.10.1
+pyodbc==4.0.30
 pyparsing==2.4.7
 pytest==6.2.1
 python-dateutil==2.8.1
