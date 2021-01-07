@@ -1,6 +1,7 @@
-import unittest,pymongo,uuid
+import unittest
 from api import create_app
-
+import pymongo
+import uuid
 
 
 # python -m unittest discover -p mongodb_test.py
@@ -134,7 +135,8 @@ class MongoDBTestMethods(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        # delete db after tests finished
+        # delete db after tests finishjed
+
         cls.app.mongo.client.drop_database(cls.database_name)
 
     if __name__ == '__main__':

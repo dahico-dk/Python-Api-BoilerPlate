@@ -1,5 +1,4 @@
 import pymongo
-from settings import mongodb
 from bson.objectid import ObjectId
 
 
