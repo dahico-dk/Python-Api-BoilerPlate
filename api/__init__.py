@@ -22,8 +22,8 @@ def create_app(test_config=None, test_database=None):
     # setup_mongodb(app, username="<username>", password="<password>",
     #               host="<host>", database_name="<dbname>" if test_database is None else test_database)
 
-    setup_sql_db(app, dbtype=DBType.POSTGRESQL, username="postgres", password="1234",
-                 host="localhost:5432", database_name="<dbname>" if test_database is None else test_database)
+    setup_sql_db(app, dbtype=DBType.POSTGRESQL, username="<username>", password="<password>",
+                 host="<host>", database_name="<dbname>" if test_database is None else test_database)
 
     # CORS Headers
     @app.after_request
