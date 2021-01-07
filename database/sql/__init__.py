@@ -1,11 +1,10 @@
-import os
 from sqlalchemy import create_engine
-import json
-import random
+import json, os, random
 from settings import db_url
 from sqlalchemy_utils import database_exists, create_database
-from database.sql import Test, db
-from database.sql import DBType
+from database.sql.models import db
+from database.sql.dbtype import DBType
+from flask_sqlalchemy import SQLAlchemy
 
 
 def setup_sql_db(app, dbtype: DBType, username, password, host, database_name):
@@ -14,6 +13,7 @@ def setup_sql_db(app, dbtype: DBType, username, password, host, database_name):
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.app = app
     db.init_app(app)
+    db.create_all()
 
 
 def choose_adapter(dbtype: DBType):
@@ -33,7 +33,7 @@ def db_drop_all():
 
 def db_create_all():
     engine = create_engine(db_url())
-    print(engine.url)
+    # print(engine.url)
     if not database_exists(engine.url):
         print("Creating DB")
         create_database(engine.url)

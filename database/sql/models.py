@@ -4,13 +4,11 @@ from sqlalchemy import Column, String, Integer, create_engine
 db = SQLAlchemy()
 
 
-class ModelBase():
+class ModelBase:
+
     def insert(self):
-        try:
-            db.session.add(self)
-            db.session.commit()
-        except Exception as e:
-            print(e)
+        db.session.add(self)
+        db.session.commit()
 
     def delete(self):
         db.session.delete(self)
@@ -29,11 +27,3 @@ class Test(db.Model, ModelBase):
     id = Column(Integer, primary_key=True)
     # String Title
     title = Column(String(80), unique=True)
-
-    def insert(self):
-        db.session.add(self)
-        db.session.commit()
-
-    def delete(self):
-        db.session.delete(self)
-        db.session.commit()
