@@ -3,6 +3,15 @@ from auth.auth import AuthError
 
 
 def set_handler(app):
+    @app.errorhandler(401)
+    def handle_401(e):
+        return jsonify({
+            "error": 401,
+            "message": "Unauthorized ",
+            "success": False
+        })
+
+
     @app.errorhandler(404)
     def handle_404(e):
         return jsonify({
