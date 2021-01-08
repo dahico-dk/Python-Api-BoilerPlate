@@ -34,7 +34,13 @@ For Unix or MacOS
 source tutorial-env/bin/activate
 ```
 
-The file path will be shown with (env) prefix on terminal after activating the virtual environment.
+The file path will be shown with (env) prefix on terminal after activating the virtual environment like below.
+
+```
+(env) D:\Repo\Python\python-api-boilerplate>
+
+```
+
 
 After setting up the virtual environment we can install the necessary packages to our project. We can use the below command to install all of our dependencies based on the the text file within the project.
 
