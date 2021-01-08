@@ -4,7 +4,7 @@
 
 
 
-##### Installing Dependencies
+#### Installing Dependencies
 
 Although the project can run if the dependencies are installed globally in the host machine using virtual environment is highly recommended.
 
