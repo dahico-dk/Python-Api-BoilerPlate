@@ -20,7 +20,7 @@ Instructions for setting up a virtual environment for your platform can be found
 
 Once virtual environment has been set and running, dependencies can be installed by running at the root directory 
 
-```
+```bash
 pip install - r requirements.txt
 ```
 
@@ -42,17 +42,17 @@ This will install all of the required packages in the `requirements.txt` file.
 
 To use the SQL database we should import necessary functions from database module within the project.
 
-```
+```python
+from database.sql import db_create_all, db_drop_all, setup_sql_db
 from database.sql.models import Test
 from database.sql.dbtype import DBType
-from database.sql import setup_sql_db
 ```
 
 - ***database.sql.models*** contains the models of the database. Test is a model which is created for test purposes. All the models inherits `ModelBase` class which is in the models file too. `ModelBase` class has insert,update and delete methods which is common for all the model classes..
 - ***database.sql.dbtype*** is the enum for database type. We pass this enum to the function to choose SQL database type.
 - ***database.sql*** module contains functions for setup, create and drop functions for database. `setup_sql_db()`function sets up the connection string as can be seen in the code below.
 
-```
+```python
 setup_sql_db(app, dbtype=DBType.POSTGRESQL, username="<username>", password="<password>",
                  host="<host>", database_name="<dbname>" if test_database is None else test_database)
 ```
@@ -61,7 +61,7 @@ setup_sql_db(app, dbtype=DBType.POSTGRESQL, username="<username>", password="<pa
 
 The models which inherits the ModelBase class can use the ***insert, delete, update*** functions for basic transaction.
 
-```
+```python
 class Test(db.Model, ModelBase):
     def __init__(self, title):
         self.title = title
@@ -75,7 +75,7 @@ class Test(db.Model, ModelBase):
 
 Although *SQLALCHEMY* supports raw queries we can use *ModelBase* methods and query method for basic transactions by using our model class.
 
-```
+```python
 #Select
 Test.query.filter_by(id=42).first()
 #insert
@@ -94,11 +94,11 @@ test.delete()
 
 Setting up the MongoDB database is pretty much same with setting up the SQL database process.
 
-```
+```python
 from database.mongodb import setup_mongodb
 ```
 
-```
+```python
 # seting databases
     setup_mongodb(app, username="<username>", password="<password>",
                   host="<host>", database_name="<dbname>" if test_database is None else test_database)
@@ -110,7 +110,7 @@ We can use SQL and MongoDB database at the same time. `setup_mongodb` function w
 
 ###### Using mongo object functions for transactions
 
-```
+```python
 #insert (pass a dictionary to add to the collection)
 app.mongo.insert_row(table_name="TestTable" row={name:"Test42"})
 
@@ -156,7 +156,7 @@ To test the database functions first we should call the necessary functions in t
 
 To test the databases we can use below commands
 
-```
+```python
 #for testing mongodb
 python -m unittest discover -p mongodb_test.py
 
@@ -169,7 +169,7 @@ python -m unittest discover -p sql_test.py
 
 To create a public endpoint we can simply use *Flask* decorators.
 
-```
+```python
 @app.route('/')
  def index():
     return jsonify({
@@ -187,7 +187,7 @@ To create a public endpoint we can simply use *Flask* decorators.
 
 Errors are returned as JSON objects in the following format.
 
-```
+```python
 {
        "error": 404,
        "message": "resource not found",
@@ -197,7 +197,7 @@ Errors are returned as JSON objects in the following format.
 
 There is a errorhandler.py file within the api module and it returns custom results for frequent http errors. It is added to the pipeline with. 
 
-```
+```python
 from api.errorhandler import set_handler
 
 app = set_handler(app)
@@ -205,7 +205,7 @@ app = set_handler(app)
 
 With this we will return these json object errors whenever we use built in abort function of Flask with pre created error messages in that file.
 
-```
+```python
 #this will return the jsonified response from errorhandler.py file
 abort(401)
 ```
@@ -225,13 +225,13 @@ This module returns eight error types
 
 To create secure endpoints we should import necessary functions from the auth module.
 
-```
+```python
 from auth.auth import requires_auth, create_enc_token, decrypt
 ```
 
 `create_enc_token` method will create a JWT token for client, create and add that UUID to session. And adds the same UUID to the claim section of the token to differentiate the clients. 
 
-```
+```python
 	key = jwk.JWK(generate='oct', size=256)
     uid = str(uuid.uuid4())
     set_key(key.export(), uid)
@@ -246,7 +246,7 @@ from auth.auth import requires_auth, create_enc_token, decrypt
 
 And we will pass this token to the client.
 
-```
+```python
  	# public api endpoint. Creates a encrypted jwt token
     @app.route('/api/public')
     def public_url():
@@ -258,7 +258,7 @@ And we will pass this token to the client.
 
 After that client with valid Authorization header will have access to the secure endpoints within the same session. `requires_auth` is the decorator we use for validating tokens. It will throw a 401 error on fail.
 
-```
+```python
  	# private endpoint. Will throw 401 if token is not right
     @app.route('/api/restricted')
     @requires_auth()
@@ -270,7 +270,7 @@ After that client with valid Authorization header will have access to the secure
 
 Auth module will called by decorator and decrypt the token . And compare the uid claim with the session.
 
-```
+```python
 # returns true or false. Compares uid with the payload
 def decrypt(e):
     key, uid = get_key()
