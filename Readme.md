@@ -38,7 +38,6 @@ The file path will be shown with (env) prefix on terminal after activating the v
 
 ```
 (env) D:\Repo\Python\python-api-boilerplate>
-
 ```
 
 
