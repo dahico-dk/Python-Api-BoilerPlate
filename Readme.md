@@ -50,7 +50,7 @@ from database.sql import setup_sql_db
 
 - ***database.sql.models*** contains the models of the database. Test is a model which is created for test purposes. All the models inherits `ModelBase` class which is in the models file too. `ModelBase` class has insert,update and delete methods which is common for all the model classes..
 - ***database.sql.dbtype*** is the enum for database type. We pass this enum to the function to choose SQL database type.
-- ***database.sql*** module contains methods for setup, create and drop functions for database. `setup_sql_db()`function sets up the connection string as can be seen in the code below.
+- ***database.sql*** module contains functions for setup, create and drop functions for database. `setup_sql_db()`function sets up the connection string as can be seen in the code below.
 
 ```
 setup_sql_db(app, dbtype=DBType.POSTGRESQL, username="<username>", password="<password>",
