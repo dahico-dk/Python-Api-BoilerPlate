@@ -12,29 +12,29 @@ Follow instructions to install the latest version of python for your platform in
 
 #### Virtual Environment
 
-Although the project can run if the dependencies are installed globally in the host machine using virtual environment is highly recommended. This keeps your dependencies for each project separate and organized. 
+Although the project can run if the dependencies are installed globally using virtual environment is highly recommended. This keeps dependencies for each project separate and organized. 
 
 Instructions for setting up a virtual environment for your platform can be found in the [python docs](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/).
 
 #### PIP Dependencies
 
-Once you have your virtual environment setup and running, install dependencies by navigating to the root directory and run
+Once virtual environment has been set and running, dependencies can be installed by running at the root directory 
 
 ```
 pip install - r requirements.txt
 ```
 
-This will install all of the required packages we selected within the `requirements.txt` file.
+This will install all of the required packages in the `requirements.txt` file.
 
 ##### Key Dependencies
 
 - [Flask](http://flask.pocoo.org/)  is a lightweight backend microservices framework. Flask is required to handle requests and responses.
-- [SQLAlchemy](https://www.sqlalchemy.org/) is the Python SQL toolkit and ORM we'll use handle the sql database. [flask_sqlalchemy](https://readthedocs.org/projects/flask-sqlalchemy/) will be the wrapper.
-- [sqlalchemy_utils](https://sqlalchemy-utils.readthedocs.io/en/latest/) is the module for creating and dropping databases. 
+- [SQLAlchemy](https://www.sqlalchemy.org/) is the Python SQL toolkit and ORM which will be used for handling the sql database. [Flask-SQLAlchemy](https://readthedocs.org/projects/flask-sqlalchemy/) will be the wrapper.
+- [SQLAlchemy-Utils](https://sqlalchemy-utils.readthedocs.io/en/latest/) is the module for creating and dropping databases. 
 - [Flask-CORS](https://flask-cors.readthedocs.io/en/latest/#) is the extension we'll use to handle cross origin requests. 
-- [jwtcrypto](https://jwcrypto.readthedocs.io/en/latest/) is the module we will use for creating encrypted jwt tokens. 
-- [flask_session](https://flask-session.readthedocs.io/en/latest/) is the module we will use for creating sessions and diferantiate client side for jwt decryption
-- [pymongo](https://readthedocs.org/projects/pymongo/) is the module we will use for interacting with MongoDB database.
+- [JWCrypto](https://jwcrypto.readthedocs.io/en/latest/) is the module we will use for creating encrypted jwt tokens. 
+- [Flask-Session](https://flask-session.readthedocs.io/en/latest/) is the module we will use for creating sessions and diferantiate client side for jwt decryption
+- [PyMongo](https://readthedocs.org/projects/pymongo/) is the module we will use for interacting with MongoDB database.
 
 ### Database Setup
 
