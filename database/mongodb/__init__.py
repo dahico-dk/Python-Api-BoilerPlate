@@ -7,6 +7,9 @@ def setup_mongodb(app, username, password, host, database_name):
 
 
 class MongoLayer:
+    """
+    creates mongodb uri and creates a test collection to create the database.
+    """
 
     def __init__(self, username, password, host, database_name):
         self.uri = f"mongodb+srv://{username}:{password}@{host}/?retryWrites=true&w=majority"
@@ -27,6 +30,8 @@ class MongoLayer:
         db = self.client[db_name if db_name is not None else self.database_name]
         coll = db[table_name]
         return coll
+
+    # basic transaction methods
 
     def insert_row(self, table_name, row: dict, db_name=None):
         coll = self.gettable(table_name, db_name)

@@ -5,12 +5,14 @@ from flask import session, abort, request
 import json
 
 
+# adds given key to the session
 def set_key(key, uid):
     session['auth_key'] = key
     # second layer of request track
     session['uid'] = uid
 
 
+# creates a encrypted jwt token which contains session uuid as claim
 def create_enc_token():
     key = jwk.JWK(generate='oct', size=256)
     uid = str(uuid.uuid4())
@@ -41,6 +43,7 @@ def decrypt(e):
     return stdict.get("uid")
 
 
+# authentication decorator. Throws 401 on unvalid tokens
 def requires_auth(permission=''):
     def requires_auth_deco(f):
         @wraps(f)
@@ -71,7 +74,6 @@ def get_token_auth_header():
        token: the token at authorization header as string
 
     """
-
     auth = request.headers.get('Authorization', None)
     if not auth:
         raise AuthError({
@@ -110,7 +112,6 @@ def check_permissions(permission, payload):
     Returns:
         Boolean
     """
-
     if 'permissions' not in payload:
         abort(401)
 

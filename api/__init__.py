@@ -13,33 +13,35 @@ from flask_migrate import Migrate
 
 def create_app(test_config=None, test_database=None):
     app = Flask(__name__)
-    CORS(app, resources={r"/api/*": {"origins": "*"}})
-    # for session diferantiate
+    # Allow CORS on needed situations
+    # CORS(app, resources={r"/api/*": {"origins": "*"}})
+
+    # we are using session for diferantiate the clients
     app.secret_key = str(uuid.uuid4())
     app = set_handler(app)
 
-    # # seting databases
+    # # SETTİNG DATABASES (SQL OR MONGODB)
     # setup_mongodb(app, username="<username>", password="<password>",
     #               host="<host>", database_name="<dbname>" if test_database is None else test_database)
 
     setup_sql_db(app, dbtype=DBType.POSTGRESQL, username="<username>", password="<password>",
                  host="<host>", database_name="<dbname>" if test_database is None else test_database)
 
-    # CORS Headers
+    # Response Headers
     @app.after_request
     def after_request(response):
         response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization,true')
         response.headers.add('Access-Control-Allow-Methods', 'GET,PATCH,POST,DELETE')
         return response
 
-    # public api endpoint
+    # A public api endpoint
     @app.route('/')
     def index():
         return jsonify({
             "message": "Hello World"
         })
 
-    # public api endpoint. Creates a encrypted jwt token
+    # public api endpoint. Creates a encrypted jwt token for client. Adds that token to the session.
     @app.route('/api/public')
     def public_url():
         return jsonify({

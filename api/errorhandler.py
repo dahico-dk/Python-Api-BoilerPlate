@@ -1,6 +1,7 @@
 from flask import jsonify
 from auth.auth import AuthError
 
+# Custom error responses for common 4xx errors
 
 def set_handler(app):
     @app.errorhandler(401)

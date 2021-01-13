@@ -3,7 +3,7 @@ from sqlalchemy import Column, String, Integer, create_engine
 
 db = SQLAlchemy()
 
-
+# base class for all models. So model can use its own methods to use basic transactions.
 class ModelBase:
 
     def insert(self):
@@ -18,7 +18,7 @@ class ModelBase:
         # properties must be changed before calling this method
         db.session.commit()
 
-
+# Test Model
 class Test(db.Model, ModelBase):
     def __init__(self, title):
         self.title = title

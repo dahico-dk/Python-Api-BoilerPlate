@@ -6,6 +6,7 @@ from database.sql.dbtype import DBType
 from flask_sqlalchemy import SQLAlchemy
 
 
+# creating connection string for sql connection. And initializes it within app
 def setup_sql_db(app, dbtype: DBType, username, password, host, database_name):
     conn = f"{choose_adapter(dbtype)}://{username}:{password}@{host}/{database_name}"
     conn += "?driver=SQL+Server" if dbtype is DBType.MSSQL else ""
@@ -17,6 +18,7 @@ def setup_sql_db(app, dbtype: DBType, username, password, host, database_name):
     db_create_all(conn)
 
 
+# chooses adapter based on dbtype
 def choose_adapter(dbtype: DBType):
     if dbtype is DBType.MSSQL:
         return "mssql+pyodbc"
@@ -26,7 +28,7 @@ def choose_adapter(dbtype: DBType):
         return "postgresql"
     return "mssql+pyodbc"
 
-
+# drops all tables and drops db if it is a unit test
 def db_drop_all(testing=False, conn=""):
     db.session.commit()
     db.session.close()
@@ -37,7 +39,7 @@ def db_drop_all(testing=False, conn=""):
             print("Dropping DB")
             drop_database(engine.url)
 
-
+# create db(if not exist) and tables
 def db_create_all(conn):
     engine = create_engine(conn)
     # print(engine.url)
