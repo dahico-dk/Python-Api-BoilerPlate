@@ -58,7 +58,7 @@ setup_sql_db(app, dbtype=DBType.POSTGRESQL, username="<username>", password="<pa
                  host="<host>", database_name="<dbname>" if test_database is None else test_database)
 ```
 
-###### *ModelBase inheritance*
+###### *ModelBase inheritance* (SQL Databases only)
 
 The models which inherits the ModelBase class can use the ***insert, delete, update*** functions for basic transaction.
 
