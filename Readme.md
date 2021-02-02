@@ -233,7 +233,7 @@ from auth.auth import requires_auth, create_enc_token, decrypt
 `create_enc_token` method will create a JWT token for client, create and add that UUID to session. And adds the same UUID to the claim section of the token to differentiate the clients. 
 
 ```python
-	key = jwk.JWK(generate='oct', size=256)
+    key = jwk.JWK(generate='oct', size=256)
     uid = str(uuid.uuid4())
     set_key(key.export(), uid)
     token = jwt.JWT(header={"alg": "HS256"},
